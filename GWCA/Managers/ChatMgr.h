@@ -64,12 +64,12 @@ namespace GW {
 
 		GWCA_API void WriteChatF(Channel channel, const wchar *sender, const char *fmt, ...);
 
-		typedef std::function<void(int argc, LPWSTR *argv)> CmdCB;
+		typedef std::function<void(const wchar_t *msg, int argc, LPWSTR *argv)> CmdCB;
 		GWCA_API void CreateCommand(std::wstring cmd, CmdCB callback);
 		GWCA_API void DeleteCommand(std::wstring cmd);
 
 		extern bool ShowTimestamps;
-		extern bool KeepChatHistory;
+		// extern bool KeepChatHistory; @Deprecated
 		extern bool Timestamp_24hFormat;
 		extern Color TimestampsColor;
 
@@ -85,6 +85,8 @@ namespace GW {
 
 		GWCA_API Color SetSenderColor(Channel chan, Color col);
 		GWCA_API Color SetMessageColor(Channel chan, Color col);
+		GWCA_API void  GetChannelColors(Channel chan, Color *sender, Color *message);
+		GWCA_API void  GetDefaultColors(Channel chan, Color *sender, Color *message);
 
 		GWCA_API void SetChatEventCallback(std::function<
 			void(DWORD, DWORD, wchar_t*, void*)> callback);

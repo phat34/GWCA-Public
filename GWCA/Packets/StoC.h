@@ -136,6 +136,11 @@ namespace GW {
 			};
 			const DWORD Packet<DataWindow>::STATIC_HEADER = 131;
 
+			struct ItemStreamEnd : Packet<ItemStreamEnd> {
+				DWORD unk1;
+			};
+			const DWORD Packet<ItemStreamEnd>::STATIC_HEADER = 134;
+
             // Pings and drawing in compass
 			struct CompassEvent : Packet<CompassEvent> {
 				DWORD Player;    // player who sent the ping (PlayerNumber)
@@ -207,6 +212,29 @@ namespace GW {
 			};
 			const DWORD Packet<AgentModel>::STATIC_HEADER = 175;
 
+			struct ObjectiveAdd : Packet<ObjectiveAdd> {
+				DWORD objective_id;
+				DWORD type;
+				wchar_t name[128];
+			};
+			const DWORD Packet<ObjectiveAdd>::STATIC_HEADER = 188;
+
+			struct ObjectiveDone : Packet<ObjectiveDone> {
+				DWORD objective_id;
+			};
+			const DWORD Packet<ObjectiveDone>::STATIC_HEADER = 189;
+
+			struct ObjectiveUpdateName : Packet<ObjectiveUpdateName> {
+				DWORD objective_id;
+				wchar_t objective_name[128];
+			};
+			const DWORD Packet<ObjectiveUpdateName>::STATIC_HEADER = 190;
+
+			struct TransactionDone : Packet<TransactionDone> {
+				DWORD unk1;
+			};
+			const DWORD Packet<TransactionDone>::STATIC_HEADER = 205;
+
             // Skill Activate (begin casting)
 			struct SkillActivate : Packet<SkillActivate> {
 				DWORD agent_id;
@@ -241,11 +269,11 @@ namespace GW {
 			const DWORD Packet<CharacterAddGold>::STATIC_HEADER = 323;
 
             // Gold removed from inventory
-			struct StorageAddGold : Packet<StorageAddGold> {
+			struct CharacterRemoveGold : Packet<CharacterRemoveGold> {
 				DWORD unk; // some kind of id? but neither agentid nor playerid
 				DWORD gold;
 			};
-			const DWORD Packet<StorageAddGold>::STATIC_HEADER = 338;
+			const DWORD Packet<CharacterRemoveGold>::STATIC_HEADER = 338;
 
             struct InstanceLoadFile : Packet<InstanceLoadFile> {
 				DWORD map_fileID;
@@ -255,6 +283,16 @@ namespace GW {
 				BYTE unk2;
 			};
 			const DWORD Packet<InstanceLoadFile>::STATIC_HEADER = 407;
+
+			struct InstanceLoadInfo : Packet<InstanceLoadInfo> {
+				DWORD agent_id;
+				DWORD map_id;
+				DWORD is_explorable;
+				DWORD district;
+				DWORD language;
+				DWORD is_observer;
+			};
+			const DWORD Packet<InstanceLoadInfo>::STATIC_HEADER = 411;
 
             struct GameSrvTransfer : Packet<GameSrvTransfer> {
 				BYTE host[24]; // ip of the game server
@@ -266,12 +304,21 @@ namespace GW {
 			};
 			const DWORD Packet<GameSrvTransfer>::STATIC_HEADER = 422;
 
+			struct DoACompleteZone : Packet<DoACompleteZone> {
+				wchar_t message[122];
+			};
+			const DWORD Packet<DoACompleteZone>::STATIC_HEADER = 432;
+
             struct PartyPlayerAdd : Packet<PartyPlayerAdd> {
 				// WORD
 				// WORD
 				// BYTE
 			};
 			const DWORD Packet<PartyPlayerAdd>::STATIC_HEADER = 460;
+
+			struct PartyDefeated : Packet<PartyDefeated> {
+			};
+			const DWORD Packet<PartyDefeated>::STATIC_HEADER = 473;
         }
 	}
 }

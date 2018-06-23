@@ -27,7 +27,8 @@ namespace GW {
         /* +h0004 */ Array<wchar> message_buff;
         /* +h0014 */ BYTE h0014[0x10];
         /* +h0024 */ MerchItemArray merchitems;
-        /* +h0034 */ BYTE h0034[0x48];
+        /* +h0034 */ MerchItemArray merchitems2;
+        /* +h0044 */ BYTE h0044[0x38];
         /* +h007C */ MapAgentArray mapagents;
         /* +h008C */ BYTE h008C[0x10];
         /* +h009C */ Vec3f all_flag;
@@ -43,10 +44,11 @@ namespace GW {
         /* +h0518 */ Array<void*> h0518;
         /* +h0528 */ DWORD activequestid;
         /* +h052C */ QuestLog questlog;
-        /* +h053C */ BYTE h053C[0x38];
+        /* +h053C */ BYTE h053C[0x28];
+        /* +h0564 */ Array<MissionObjective> mission_objectives;
         /* +h0574 */ Array<DWORD> h0574; // Seems like agent/item ids (only appears in outpost?)
         /* +h0584 */ HeroFlagArray hero_flags;
-        /* +h0594 */ Array<void*> h0594;
+        /* +h0594 */ HeroInfoArray hero_info;
         /* +h05A4 */ Array<void*> h05A4; // Struct size = 0x20
         /* +h05B4 */ DWORD h05B4[2];
         /* +h05BC */ Array<void*> h05BC;
