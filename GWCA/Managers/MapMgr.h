@@ -50,5 +50,8 @@ namespace GW {
 			Constants::MapID map_id = GetMapID();
 			return GetMapInfo(map_id);
 		}
+
+		GWCA_API bool GetIsInCinematic(void);
+		GWCA_API void SkipCinematic(void);
 	};
 }
